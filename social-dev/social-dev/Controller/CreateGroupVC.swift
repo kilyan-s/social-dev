@@ -20,6 +20,8 @@ class CreateGroupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableview.delegate = self
+        tableview.dataSource = self
 
     }
     
@@ -30,4 +32,23 @@ class CreateGroupVC: UIViewController {
     @IBAction func doneBtnWasPressed(_ sender: Any) {
     }
     
+}
+
+extension CreateGroupVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell else { return UITableViewCell() }
+        let profileImg = UIImage(named: "defaultProfileImage")
+        
+        cell.configureCell(withProfileImg: profileImg!, andEmail: "sockalingum.kilyan@gmail.com", andIsSelected: true)
+        
+        return cell
+    }
 }
