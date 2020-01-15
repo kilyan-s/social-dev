@@ -30,15 +30,15 @@ class LoginVC: UIViewController {
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     debugPrint(String(describing: loginError?.localizedDescription))
-                }
                 
-                AuthService.instance.registerUser(withEmail: self.emailTxtField.text!, andPassword: self.passwordTxtField.text!) { (success, registerError) in
-                    if success {
-                        AuthService.instance.loginUser(withEmail: self.emailTxtField.text!, andPassword: self.passwordTxtField.text!) { (success, nil) in
-                            self.dismiss(animated: true, completion: nil)
+                    AuthService.instance.registerUser(withEmail: self.emailTxtField.text!, andPassword: self.passwordTxtField.text!) { (success, registerError) in
+                        if success {
+                            AuthService.instance.loginUser(withEmail: self.emailTxtField.text!, andPassword: self.passwordTxtField.text!) { (success, nil) in
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                        } else {
+                            print(String(describing: registerError?.localizedDescription))
                         }
-                    } else {
-                        print(String(describing: registerError?.localizedDescription))
                     }
                 }
             }
