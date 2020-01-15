@@ -175,7 +175,7 @@
         <!--AuthVC-->
         <scene sceneID="UlU-rA-hz4">
             <objects>
-                <viewController storyboardIdentifier="AuthVC" id="AMr-XF-BY4" customClass="AuthVC" customModule="social_dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthVC" modalPresentationStyle="fullScreen" id="AMr-XF-BY4" customClass="AuthVC" customModule="social_dev" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k4F-9e-9ug">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -210,6 +210,9 @@
                                                 <state key="normal" title="LOGIN WITH FB">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signinByFbWasPressed:" destination="AMr-XF-BY4" eventType="touchUpInside" id="eiu-Ax-AvX"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ho-r0-Uyr">
                                                 <rect key="frame" x="0.0" y="185" width="334" height="82.5"/>
@@ -217,6 +220,9 @@
                                                 <state key="normal" title="LOGIN WITH GOOGLE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signinByGoogleWasPressed:" destination="AMr-XF-BY4" eventType="touchUpInside" id="LGt-bn-6Gg"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcD-X9-7RT">
                                                 <rect key="frame" x="0.0" y="277.5" width="334" height="82.5"/>
@@ -235,6 +241,9 @@
                                         <state key="normal" title="  by email" image="emailIcon">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signinByEmailWasPressed:" destination="AMr-XF-BY4" eventType="touchUpInside" id="bwS-k7-bb7"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.25490196078431371" green="0.27058823529411763" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
@@ -272,7 +281,7 @@
         <!--LoginVC-->
         <scene sceneID="Gqs-eG-FJF">
             <objects>
-                <viewController storyboardIdentifier="LoginVC" id="U8Y-70-YEq" customClass="LoginVC" customModule="social_dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" modalPresentationStyle="fullScreen" id="U8Y-70-YEq" customClass="LoginVC" customModule="social_dev" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DMZ-tg-1nA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -284,6 +293,9 @@
                                     <constraint firstAttribute="height" constant="30" id="DZi-JI-4Jf"/>
                                 </constraints>
                                 <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="closeBtnWasPressed:" destination="U8Y-70-YEq" eventType="touchUpInside" id="Zbm-P1-NUO"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fEN-zt-deR">
                                 <rect key="frame" x="20" y="104" width="374" height="161"/>
@@ -325,6 +337,9 @@
                                 <state key="normal" title="SIGN IN">
                                     <color key="titleColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="signinBtnWasPressed:" destination="U8Y-70-YEq" eventType="touchUpInside" id="khz-1B-qVB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.25490196079999999" green="0.27058823529999998" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -339,10 +354,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0so-bt-loT"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTxtField" destination="hig-ii-UxT" id="BTz-wt-DwA"/>
+                        <outlet property="passwordTxtField" destination="zyl-Rh-5nP" id="FAR-Oq-TGq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MH6-Kx-5m0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1299" y="0.0"/>
+            <point key="canvasLocation" x="-1577" y="0.0"/>
         </scene>
     </scenes>
     <resources>
