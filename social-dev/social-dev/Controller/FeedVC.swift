@@ -9,12 +9,46 @@
 import UIKit
 
 class FeedVC: UIViewController {
-
+    //Outlets
+    @IBOutlet weak var tableview: UITableView!
+    
+    //Variables
+    var messageArray = [Message]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        tableview.delegate = self
+        tableview.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DataService.instance.getAllFeedMessages { (messages) in
+            self.messageArray = messages
+            self.tableview.reloadData()
+        }
     }
 
+    //Actions
 
 }
 
+extension FeedVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messageArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableview.dequeueReusableCell(withIdentifier: "feedCell") as? FeedCell else { return UITableViewCell() }
+        let image = UIImage(named: "defaultProfileImage")
+        let message = messageArray[indexPath.row]
+        
+        cell.configureCell(profileImg: image!, email: message.senderId, content: message.content)
+        
+        return cell
+    }
+}
