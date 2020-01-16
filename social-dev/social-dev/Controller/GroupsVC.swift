@@ -9,12 +9,46 @@
 import UIKit
 
 class GroupsVC: UIViewController {
-
+    //Outlets
+    @IBOutlet weak var tableview: UITableView!
+    
+    //Var
+    var groups = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        tableview.delegate = self
+        tableview.dataSource = self
     }
+    
+    //Func
+    
+    //Actions
 
 
 }
 
+
+extension GroupsVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return groups.count
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as? GroupCell else { return UITableViewCell() }
+        
+        //let group = groups[indexPath.row]
+        cell.configureCell(withTitle: "Title", andDescription: "Description", numberOfMembers: 5)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+}
