@@ -97,4 +97,27 @@ class DataService {
             completion(emailArray)
         }
     }
+    
+    func getIds(forUsernames usernames: [String], completion: @escaping (_ uidArray: [String]) -> ()) {
+        var idArray = [String]()
+        
+        REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in
+            guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
+            
+            for user in userSnapshot {
+                let userEmail = user.childSnapshot(forPath: "email").value as! String
+                if usernames.contains(userEmail) {
+                    let userUID = user.key
+                    idArray.append(userUID)
+                }
+            }
+            
+            completion(idArray)
+        }
+    }
+    
+    func createGroup(withTitle title: String, andDescription descr: String, forUserIds ids: [String], completion: @escaping CompletionHandler) {
+        REF_GROUPS.childByAutoId().updateChildValues(["title": title, "description": descr, "members": ids])
+        completion(true)
+    }
 }
