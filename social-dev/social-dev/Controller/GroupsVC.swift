@@ -13,7 +13,7 @@ class GroupsVC: UIViewController {
     @IBOutlet weak var tableview: UITableView!
     
     //Var
-    var groups = [String]()
+    var groups = [Group]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

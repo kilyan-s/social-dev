@@ -116,8 +116,34 @@ class DataService {
         }
     }
     
+    //PRAGMARK: Groups
     func createGroup(withTitle title: String, andDescription descr: String, forUserIds ids: [String], completion: @escaping CompletionHandler) {
         REF_GROUPS.childByAutoId().updateChildValues(["title": title, "description": descr, "members": ids])
         completion(true)
     }
+    
+    func getAllGroups(completion: @escaping (_ groupsArray: [Group]) -> ()) {
+        var groupsArr = [Group]()
+        
+        REF_GROUPS.observeSingleEvent(of: .value) { (groupSnapshot) in
+            guard let groupSnapshot = groupSnapshot.children.allObjects as? [DataSnapshot] else { return }
+            
+            for group in groupSnapshot {
+                let groupMembers = group.childSnapshot(forPath: "members").value as! [String]
+                if groupMembers.contains(Auth.auth().currentUser!.uid){
+                    let groupKey = group.key
+                    let groupTitle = group.childSnapshot(forPath: "title").value as! String
+                    let groupDescr = group.childSnapshot(forPath: "description").value as! String
+                    let membersCount = groupMembers.count
+                    
+                    let newGroup = Group(title: groupTitle, descr: groupDescr, key: groupKey, memberCount: membersCount, members: groupMembers)
+                    groupsArr.append(newGroup)
+                }
+            }
+            
+            completion(groupsArr)
+        }
+    }
+    
+    
 }
