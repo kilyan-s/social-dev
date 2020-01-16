@@ -19,6 +19,7 @@ class CreateGroupVC: UIViewController {
     
     //Variables
     var emailArray = [String]()
+    var chosenUsers = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,11 @@ class CreateGroupVC: UIViewController {
         tableview.dataSource = self
         emailSearchTextField.delegate = self
         emailSearchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        doneBtn.isHidden = true
     }
     
     //Actions
@@ -63,9 +69,43 @@ extension CreateGroupVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell else { return UITableViewCell() }
         let profileImg = UIImage(named: "defaultProfileImage")
         let email = emailArray[indexPath.row]
-        cell.configureCell(withProfileImg: profileImg!, andEmail: email, andIsSelected: false)
+        var userIsSelected = false
+        
+        //Check if email is already selected
+        if chosenUsers.contains(email) {
+            userIsSelected = true
+        }
+        
+        cell.configureCell(withProfileImg: profileImg!, andEmail: email, andIsSelected: userIsSelected)
+        
+        //If user is selected, select this cell for didSelect and didDeselect actions to work properly
+        if userIsSelected {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? UserCell else { return }
+        cell.updateSelectedStatus(isSelected: true)
+        
+        chosenUsers.append(cell.emailLbl.text!)
+        groupMemberLbl.text = chosenUsers.joined(separator: ", ")
+        doneBtn.isHidden = false
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? UserCell else { return }
+        cell.updateSelectedStatus(isSelected: false)
+        
+        chosenUsers = chosenUsers.filter({ $0 != cell.emailLbl.text!})
+        if chosenUsers.count > 0 {
+            groupMemberLbl.text = chosenUsers.joined(separator: ", ")
+        } else {
+            groupMemberLbl.text = "Add members to your group"
+            doneBtn.isHidden = true
+        }
     }
 }
 
