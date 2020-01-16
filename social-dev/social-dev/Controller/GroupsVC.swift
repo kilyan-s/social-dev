@@ -21,6 +21,16 @@ class GroupsVC: UIViewController {
         tableview.dataSource = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DataService.instance.REF_GROUPS.observe(.value) { (groupSnapshot) in
+            DataService.instance.getAllGroups { (resultGroups) in
+                self.groups = resultGroups
+                self.tableview.reloadData()
+            }
+        }
+    }
+    
     //Func
     
     //Actions
@@ -35,15 +45,15 @@ extension GroupsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return groups.count
-        return 3
+        return groups.count
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as? GroupCell else { return UITableViewCell() }
         
-        //let group = groups[indexPath.row]
-        cell.configureCell(withTitle: "Title", andDescription: "Description", numberOfMembers: 5)
+        let group = groups[indexPath.row]
+        cell.configureCell(withTitle: group.title, andDescription: group.descr, numberOfMembers: group.memberCount)
         
         return cell
     }
