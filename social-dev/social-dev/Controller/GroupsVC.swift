@@ -9,10 +9,10 @@
 import UIKit
 
 class GroupsVC: UIViewController {
-    //Outlets
+    //MARK: Outlets
     @IBOutlet weak var tableview: UITableView!
     
-    //Var
+    //MARK: Var
     var groups = [Group]()
     
     override func viewDidLoad() {
@@ -31,9 +31,9 @@ class GroupsVC: UIViewController {
         }
     }
     
-    //Func
+    //MARK: Func
     
-    //Actions
+    //MARK: Actions
 
 
 }
@@ -59,6 +59,10 @@ extension GroupsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedGroup = groups[indexPath.row]
         
+        guard let groupFeedVC = storyboard?.instantiateViewController(identifier: "GroupFeedVC") as? GroupFeedVC else { return }
+        groupFeedVC.initData(forGroup: selectedGroup)
+        present(groupFeedVC, animated: true, completion: nil )
     }
 }
