@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import IQKeyboardManagerSwift
 
 class CreatePostVC: UIViewController {
     //Outlets
@@ -25,7 +26,7 @@ class CreatePostVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.emailLbl.text = Auth.auth().currentUser?.email
-        
+        IQKeyboardManager.shared.enable = false
     }
     
     //Actions
@@ -53,5 +54,10 @@ class CreatePostVC: UIViewController {
 extension CreatePostVC: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textView.text = "Say something here ..."
+        }
     }
 }

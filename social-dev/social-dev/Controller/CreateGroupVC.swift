@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import IQKeyboardManagerSwift
 
 class CreateGroupVC: UIViewController {
     //Outlets
@@ -33,6 +34,7 @@ class CreateGroupVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         doneBtn.isHidden = true
+        IQKeyboardManager.shared.enable = false
     }
     
     //Actions
