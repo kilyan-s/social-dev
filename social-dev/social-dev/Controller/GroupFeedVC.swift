@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import IQKeyboardManagerSwift
 
 class GroupFeedVC: UIViewController {
     //MARK: Outlets
@@ -25,8 +26,9 @@ class GroupFeedVC: UIViewController {
     //MARK: Func
     override func viewDidLoad() {
         super.viewDidLoad()
+        IQKeyboardManager.shared.enable = true
         
-        messageView.bindToKeyboard()
+        //messageView.bindToKeyboard()
         
         tableview.delegate = self
         tableview.dataSource = self
