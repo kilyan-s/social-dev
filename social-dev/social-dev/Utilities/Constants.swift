@@ -14,6 +14,3 @@ typealias CompletionHandler = (_ Success: Bool) -> ()
 
 //DATABASE
 let DB_BASE = Database.database().reference()
-
-//URL
-let BASE_URL = "https://slackishks.herokuapp.com/v1"

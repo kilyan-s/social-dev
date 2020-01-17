@@ -50,8 +50,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
         DataService.instance.getUsername(forUID: message.senderId) { (userEmail) in
              cell.configureCell(profileImg: image!, email: userEmail, content: message.content)
         }
-        
-        
+
         return cell
     }
 }

@@ -102,7 +102,6 @@ class DataService {
     func getEmail(forSearchQuery query: String, completion: @escaping (_ emailArray: [String]) -> ()) {
         var emailArray = [String]()
         
-        
         REF_USERS.observe(.value) { (userSnapshot) in
             guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
             
@@ -181,6 +180,4 @@ class DataService {
             completion(groupsArr)
         }
     }
-    
-    
 }

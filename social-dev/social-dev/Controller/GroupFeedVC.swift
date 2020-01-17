@@ -28,8 +28,6 @@ class GroupFeedVC: UIViewController {
         super.viewDidLoad()
         IQKeyboardManager.shared.enable = true
         
-        //messageView.bindToKeyboard()
-        
         tableview.delegate = self
         tableview.dataSource = self
     }

@@ -31,6 +31,4 @@ class GroupFeedCell: UITableViewCell {
         self.emailLbl.text = email
         self.contentLbl.text = content
     }
-    
-    
 }

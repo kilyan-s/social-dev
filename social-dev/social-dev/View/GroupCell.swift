@@ -14,8 +14,6 @@ class GroupCell: UITableViewCell {
     @IBOutlet weak var groupDescrLbl: UILabel!
     @IBOutlet weak var memberCountLbl: UILabel!
     
-    //Variables
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -33,7 +31,4 @@ class GroupCell: UITableViewCell {
         self.groupDescrLbl.text = descr
         self.memberCountLbl.text = "\(count) members."
     }
-    
-    //Actions
-
 }
