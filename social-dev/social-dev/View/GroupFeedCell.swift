@@ -27,7 +27,7 @@ class GroupFeedCell: UITableViewCell {
     
     //MARK: Functions
     func configureCell(profileImage: UIImage, email: String, content: String) {
-        self.profileImg.image = UIImage(named: "DefaultProfileImage")
+        self.profileImg.image = profileImage
         self.emailLbl.text = email
         self.contentLbl.text = content
     }
